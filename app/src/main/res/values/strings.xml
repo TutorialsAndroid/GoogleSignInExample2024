@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ABC</string>
+    <string name="sign_in_toolbar_title">Abc</string>
+    <string name="sign_in_btn_text">Sign in with google</string>
+</resources>

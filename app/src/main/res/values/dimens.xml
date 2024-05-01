@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Margins  -->
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+
+    <!--  Paddings  -->
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+
+    <!--  Buttons  -->
+    <dimen name="button_210">210dp</dimen>
+    <dimen name="button_260">260dp</dimen>
+    <dimen name="button_icon_size">30dp</dimen>
+    <dimen name="button_corner_radius">20dp</dimen>
+
+    <!--  Texts  -->
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+</resources>

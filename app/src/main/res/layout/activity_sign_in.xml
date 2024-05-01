@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/sign_in_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:title="@string/sign_in_toolbar_title"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white"
+            app:titleTextAppearance="@style/ToolbarTitleTextAppearance"
+            android:background="?attr/toolbarBackgroundColor"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/sign_in_btn"
+            android:layout_width="@dimen/button_260"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:padding="@dimen/padding_16"
+            android:text="@string/sign_in_btn_text"
+            android:textSize="@dimen/text_16"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:icon="@drawable/ic_google_48"
+            app:iconSize="@dimen/button_icon_size"
+            tools:text="Sign in with google"/>
+    </RelativeLayout>
+
+</layout>

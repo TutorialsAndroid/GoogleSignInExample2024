@@ -1,0 +1,120 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.googleServices)
+}
+
+// Initialize Properties
+def properties = new Properties()
+try {
+    // Load keystore
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    properties.load(new FileInputStream(keystorePropertiesFile))
+} catch(IOException e) {
+    // We don't have release keys, ignoring
+    println e.printStackTrace()
+}
+
+//Release key path, password, alias
+final String RELEASE_KEY_STORE_PATH = properties.getProperty('RELEASE_KEY_STORE_PATH')
+final String RELEASE_KEY_STORE_PATH_PASSWORD = properties.getProperty('RELEASE_KEY_STORE_PATH_PASSWORD')
+final String RELEASE_KEY_STORE_PATH_ALIAS = properties.getProperty('RELEASE_KEY_STORE_PATH_ALIAS')
+
+//Debug key path, password, alias
+final String DEBUG_KEY_STORE_PATH = properties.getProperty('DEBUG_KEY_STORE_PATH')
+final String DEBUG_KEY_STORE_PATH_PASSWORD = properties.getProperty('DEBUG_KEY_STORE_PATH_PASSWORD')
+final String DEBUG_KEY_STORE_PATH_ALIAS = properties.getProperty('DEBUG_KEY_STORE_PATH_ALIAS')
+
+android {
+    namespace 'com.app.abc'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.app.abc"
+    }
+
+    signingConfigs {
+
+        release {
+            storeFile file( RELEASE_KEY_STORE_PATH )
+            storePassword RELEASE_KEY_STORE_PATH_PASSWORD
+            keyAlias RELEASE_KEY_STORE_PATH_ALIAS
+            keyPassword RELEASE_KEY_STORE_PATH_PASSWORD
+        }
+
+        debug {
+            storeFile file( DEBUG_KEY_STORE_PATH )
+            storePassword DEBUG_KEY_STORE_PATH_PASSWORD
+            keyAlias DEBUG_KEY_STORE_PATH_ALIAS
+            keyPassword DEBUG_KEY_STORE_PATH_PASSWORD
+        }
+
+    }
+
+    buildTypes {
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    flavorDimensions = ['AppFlavor']
+    productFlavors {
+        debugging {
+            dimension 'AppFlavor'
+            applicationId 'com.app.abc.debugging'
+            versionCode 1
+            versionName '1.0.0'
+            targetSdk 34
+            minSdk 28
+
+            buildFeatures {
+                buildConfig = true
+                viewBinding = true
+                dataBinding = true
+            }
+        }
+        production {
+            dimension 'AppFlavor'
+            applicationId 'com.app.abc.production'
+            versionCode 1
+            versionName '1.0.0'
+            targetSdk 34
+            minSdk 28
+
+            buildFeatures {
+                buildConfig = true
+                viewBinding = true
+                dataBinding = true
+            }
+        }
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation platform(libs.firebaseBom)
+    implementation libs.firebaseAnalytics
+    implementation libs.firebaseAuth
+    implementation libs.playServices
+    implementation libs.credentials
+    implementation libs.credentialsPlayServicesAuth
+    implementation libs.googleId
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
